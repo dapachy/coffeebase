@@ -1,0 +1,31 @@
+services:
+  frontend:
+    build:
+      context: frontend
+      dockerfile: ./Dockerfile
+    ports:
+      - 3000:3000
+
+  backend:
+    build:
+      context: backend
+      dockerfile: ./Dockerfile
+    depends_on:
+      - database
+    ports:
+      - 5000:5000
+
+  database:
+    image: mariadb:latest
+    ports:
+      - 3307:3306
+    volumes:
+      - databasedata:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${COFFEEBASE_ROOTPWD}
+      - MYSQL_PASSWORD=${COFFEEBASE_PWD}
+      - MYSQL_USER=${COFFEEBASE_USR}
+      - MYSQL_DATABASE=coffeebase
+
+volumes:
+  databasedata:

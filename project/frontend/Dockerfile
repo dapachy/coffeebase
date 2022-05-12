@@ -3,4 +3,4 @@ WORKDIR /usr/src/coffebase/frontend
 COPY ./server/ .
 RUN npm install
 EXPOSE 3000 
-CMD ["npm", "run", "dev", "--host"]
+CMD ["npm", "run", "dev"]
